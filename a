@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
+<title>Form Submit to Send Email</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+
+<?php
+if(!empty($_POST["send"])) {
+	$userName = $_POST["userName"];
+  $userEmail = $_POST["userEmail"];
+	$userPhone = $_POST["userPhone"];
+	$userMessage = $_POST["userMessage"];
+	$toEmail = "websolution90@gmail.com";
+  
+	$mailHeaders = "Name: " . $userName .
+	"\r\n Email: ". $userEmail  . 
+	"\r\n Phone: ". $userPhone  . 
+	"\r\n Message: " . $userMessage . "\r\n";
+
+	if(mail($toEmail, $userName, $mailHeaders)) {
+	    $message = "Your contact information is received successfully.";
+	}
+}
+?>
+
+<div class="form-container">
+  <form name="contactFormEmail" method="post">
+    <div class="input-row">
+      <label>Name <em>*</em></label> 
+      <input type="text" name="userName" required id="userName"> 
+    </div>
+    <div class="input-row">
+      <label>Email <em>*</em></label> 
+      <input type="email" name="userEmail" required id="userEmail"> 
+    </div>
+    <div class="input-row">
+      <label>Phone <em>*</em></label> 
+      <input type="text" name="userPhone" required id="userPhone">
+    </div>
+    <div class="input-row">
+      <label>Message <em>*</em></label> 
+     <!-- <textarea name="userMessage" required id="userMessage"> -->
+    </div>
+    <div class="input-row">
+      <input type="submit" name="send" value="Submit">
+      <?php if (! empty($message)) {?>
+      <div class='success'>
+        <strong><?php echo $message; ?>	</strong>
+      </div>
+      <?php } ?>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+<?php
+if(!empty($_POST["submit"])) {
+	$Name = $_POST["name"];
+    $Email = $_POST["email_sender"];
+	$Message = $_POST["des"];
+	$toEmail = "websolution90@gmail.com";
+  
+	$mailHeaders = "Name: " . $userName .
+	"\r\n Email: ". $userEmail  . 
+	"\r\n Phone: ". $userPhone  . 
+	"\r\n Message: " . $userMessage . "\r\n";
+
+	if(mail($toEmail, $userName, $mailHeaders)) {
+	    $message = "Your contact information is received successfully.";
+	}
+}
+?>
+
+
+
+
+
+$toEmail=$row['email'];
+
+$mailHeaders = "Name: " . $name .
+"\r\n Email: ". $email_sender  . 
+  "\r\n Message: " . $des . "\r\n";
+
+if(mail($toEmail,  $name, $mailHeaders)) {
+    $message = "Your contact information is received successfully.";
+}
+
+
+
+
+Feedback----------
+
+<?php
+$name = $_POST['name'];
+$email = $_POST['email'];
+$comment= $_POST['comment'];
+
+$username = "root";
+$password = "";
+$database = "instafound";
+
+
+$con=mysqli_connect('localhost',$username,$password);
+mysqli_select_db($con,$database) or die ("Unable to select database");
+
+if(isset($_POST['new']) && $_POST['new']==1){
+  $query = "INSERT INTO feedback VALUES ('','$name', '$email', '$comment')";
+		mysqli_query($con,$query);
+	}
+
+mysqli_close($con);
+
+?>
+
+--mail found------
+<?php
+$name = $_POST['name'];
+$email = $_POST['email'];
+$date = $_POST['date'];
+$loc = $_POST['loc'];
+$cat = $_POST['cat'];
+$sub_cat = $_POST['sub_cat'];
+$item_descp = $_POST['item_descp'];
+$post_type="Found";
+$username = "root";
+$password = "";
+$database = "instafound";
+
+
+$con=mysqli_connect('localhost',$username,$password);
+mysqli_select_db($con,$database) or die ("Unable to select database");
+
+if(isset($_POST['new']) && $_POST['new']==1){
+		$query = "INSERT INTO found_items VALUES ('','$name','$email', '$date', '$loc', '$cat', '$sub_cat', '$item_descp','$post_type')";
+		mysqli_query($con,$query);
+	}
+
+mysqli_close($con);
+
+?>
